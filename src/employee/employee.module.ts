@@ -4,6 +4,7 @@ import { EmployeeController } from './employee.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EmployeeDefinition, EmployeeSchema } from './models/employee.model';
 import { EmployeeMongoRepository } from './repositories/employee.mongo.repository';
+import { EMPLOYEE_REPOSITORY } from './repositories/employee.repository';
 
 @Module({
   imports: [
@@ -12,6 +13,9 @@ import { EmployeeMongoRepository } from './repositories/employee.mongo.repositor
     ]),
   ],
   controllers: [EmployeeController],
-  providers: [EmployeeService, EmployeeMongoRepository],
+  providers: [
+    EmployeeService,
+    { provide: EMPLOYEE_REPOSITORY, useClass: EmployeeMongoRepository },
+  ],
 })
 export class EmployeeModule {}

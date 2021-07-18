@@ -7,7 +7,10 @@ import { EmployeeModule } from './employee/employee.module';
 @Module({
   imports: [
     EmployeeModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/main'),
+    MongooseModule.forRoot('mongodb://localhost:27017/main', {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

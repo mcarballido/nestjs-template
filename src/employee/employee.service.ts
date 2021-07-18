@@ -1,10 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Employee } from './entities/employee.entity';
-import { EmployeeMongoRepository } from './repositories/employee.mongo.repository';
+import {
+  EMPLOYEE_REPOSITORY,
+  IEmployeeRepository,
+} from './repositories/employee.repository';
 
 @Injectable()
 export class EmployeeService {
-  constructor(private employeeRepository: EmployeeMongoRepository) {}
+  constructor(
+    @Inject(EMPLOYEE_REPOSITORY)
+    private employeeRepository: IEmployeeRepository,
+  ) {}
 
   create(employee: Employee) {
     return this.employeeRepository.create(employee);
