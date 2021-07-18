@@ -19,9 +19,9 @@ export class EmployeeMongoRepository implements IEmployeeRepository {
   }
 
   async getAll(): Promise<Employee[]> {
-    const employees = await this.employeeModel.find({}).lean();
+    const employees = await this.employeeModel.find({});
 
-    return employees.map(e => new Employee(e));
+    return employees.map(e => new Employee(e.toObject()));
   }
 
   async getById(id: string): Promise<Employee> {
@@ -31,17 +31,18 @@ export class EmployeeMongoRepository implements IEmployeeRepository {
       );
     }
 
-    const employee = await this.employeeModel.findById(id).lean();
+    const employee = await this.employeeModel.findById(id);
 
-    return new Employee(employee);
+    return new Employee(employee.toObject());
   }
 
   async update(id: string, updatedEmployee: Employee): Promise<Employee> {
-    const employee = await this.employeeModel
-      .findByIdAndUpdate(id, updatedEmployee)
-      .lean();
+    const employee = await this.employeeModel.findByIdAndUpdate(
+      id,
+      updatedEmployee,
+    );
 
-    return new Employee(employee);
+    return new Employee(employee.toObject());
   }
 
   async delete(id: string): Promise<void> {
