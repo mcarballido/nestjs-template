@@ -1,9 +1,9 @@
 export class Employee {
-  public id: string;
-  public firstName: string;
-  public lastName: string;
-  public dateOfBirth: Date;
-  public salary: number;
+  id: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: Date;
+  salary: number;
 
   constructor(params: Partial<Employee>) {
     Object.assign(this, params);

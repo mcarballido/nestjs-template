@@ -8,8 +8,8 @@ import {
   Delete,
 } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
-import { CreateEmployeeDto } from './dto/create-employee.dto';
-import { UpdateEmployeeDto } from './dto/update-employee.dto';
+import { CreateEmployeeDto } from './dtos/create-employee.dto';
+import { UpdateEmployeeDto } from './dtos/update-employee.dto';
 import { Employee } from './entities/employee.entity';
 
 @Controller('v1/employees')
@@ -23,12 +23,12 @@ export class EmployeeController {
 
   @Get()
   findAll() {
-    return this.employeeService.findAll();
+    return this.employeeService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.employeeService.findOne(+id);
+  getById(@Param('id') id: string) {
+    return this.employeeService.getById(id);
   }
 
   @Patch(':id')
