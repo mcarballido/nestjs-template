@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, ObjectId } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type EmployeeDocument = EmployeeDefinition & Document;
 
@@ -7,7 +7,7 @@ export type EmployeeDocument = EmployeeDefinition & Document;
   collection: 'employees',
   timestamps: true,
   toJSON: {
-    transform(doc, ret) {
+    transform(_, ret) {
       ret.id = ret._id;
       delete ret._id;
       delete ret.__v;

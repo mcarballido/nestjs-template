@@ -11,11 +11,11 @@ export class EmployeeMongoRepository {
     private employeeModel: Model<EmployeeDocument>,
   ) {}
 
-  create(employee: Employee) {
+  async create(employee: Employee) {
     return this.employeeModel.create(employee);
   }
 
-  getAll() {
+  async getAll() {
     return this.employeeModel.find({});
   }
 
@@ -29,11 +29,11 @@ export class EmployeeMongoRepository {
     return this.employeeModel.findById(id);
   }
 
-  update() {
-    return `This action updates a employee`;
+  async update(id: string, updatedEmployee: Employee) {
+    return this.employeeModel.findByIdAndUpdate(id, updatedEmployee);
   }
 
-  remove() {
-    return `This action removes a employee`;
+  async delete(id: string) {
+    return this.employeeModel.findByIdAndDelete(id);
   }
 }

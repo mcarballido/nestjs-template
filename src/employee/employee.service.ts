@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { UpdateEmployeeDto } from './dtos/update-employee.dto';
 import { Employee } from './entities/employee.entity';
 import { EmployeeMongoRepository } from './repositories/employee.mongo.repository';
 
@@ -19,11 +18,11 @@ export class EmployeeService {
     return this.employeeRepository.getById(id);
   }
 
-  update(id: number, updateEmployeeDto: UpdateEmployeeDto) {
-    return `This action updates a #${id} employee`;
+  update(id: string, updatedEmployee: Employee) {
+    return this.employeeRepository.update(id, updatedEmployee);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} employee`;
+  delete(id: string) {
+    return this.employeeRepository.delete(id);
   }
 }
