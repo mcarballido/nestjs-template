@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type EmployeeDocument = EmployeeDefinition & Document;
 
@@ -22,17 +22,20 @@ export type EmployeeDocument = EmployeeDefinition & Document;
   },
 })
 export class EmployeeDefinition {
-  @Prop()
-  firstName: string;
+  @Prop({ type: Types.ObjectId })
+  _id!: string;
 
   @Prop()
-  lastName: string;
+  firstName!: string;
 
   @Prop()
-  dateOfBirth: Date;
+  lastName!: string;
 
   @Prop()
-  salary: number;
+  dateOfBirth!: Date;
+
+  @Prop()
+  salary?: number;
 }
 
 export const EmployeeSchema = SchemaFactory.createForClass(EmployeeDefinition);

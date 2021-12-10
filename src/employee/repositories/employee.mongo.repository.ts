@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Employee } from '../entities/employee.entity';
@@ -33,14 +37,27 @@ export class EmployeeMongoRepository implements IEmployeeRepository {
 
     const employee = await this.employeeModel.findById(id);
 
+    if (!employee) {
+      throw new NotFoundException(
+        'The employee of the provided ID does not exist.',
+      );
+    }
+
     return new Employee(employee.toObject());
   }
 
-  async update(id: string, updatedEmployee: Employee): Promise<Employee> {
+  async update(id: string, employeeUpdate: Employee): Promise<Employee> {
     const employee = await this.employeeModel.findByIdAndUpdate(
       id,
-      updatedEmployee,
+      { $set: employeeUpdate },
+      { new: true },
     );
+
+    if (!employee) {
+      throw new NotFoundException(
+        'The employee of the provided ID does not exist.',
+      );
+    }
 
     return new Employee(employee.toObject());
   }

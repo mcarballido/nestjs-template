@@ -24,8 +24,8 @@ export class EmployeeService {
     return this.employeeRepository.getById(id);
   }
 
-  update(id: string, updatedEmployee: Employee) {
-    return this.employeeRepository.update(id, updatedEmployee);
+  update(id: string, employeeUpdate: Partial<Employee>) {
+    return this.employeeRepository.update(id, employeeUpdate);
   }
 
   delete(id: string) {
