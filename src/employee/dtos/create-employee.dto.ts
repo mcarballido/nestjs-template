@@ -1,15 +1,24 @@
-export class CreateEmployeeDto {
-  id?: string;
-  firstName: string;
-  lastName: string;
-  dateOfBirth: Date;
-  salary?: number;
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-  constructor(init: CreateEmployeeDto) {
-    this.id = init.id;
-    this.firstName = init.firstName;
-    this.lastName = init.lastName;
-    this.dateOfBirth = init.dateOfBirth;
-    this.salary = init.salary;
-  }
+export class CreateEmployeeDto {
+  @IsString()
+  @IsNotEmpty()
+  firstName!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  lastName!: string;
+
+  @IsDateString()
+  dateOfBirth!: string;
+
+  @IsNumber()
+  @IsOptional()
+  salary?: number;
 }

@@ -5,11 +5,17 @@ export class Employee {
   dateOfBirth: Date;
   salary?: number;
 
-  constructor(init: Employee) {
+  constructor(init: {
+    id?: string;
+    firstName: string;
+    lastName: string;
+    dateOfBirth: Date | string | number;
+    salary?: number;
+  }) {
     this.id = init.id;
     this.firstName = init.firstName;
     this.lastName = init.lastName;
-    this.dateOfBirth = init.dateOfBirth;
+    this.dateOfBirth = new Date(init.dateOfBirth);
     this.salary = init.salary;
   }
 }

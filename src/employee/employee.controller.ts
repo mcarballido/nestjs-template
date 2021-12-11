@@ -36,7 +36,7 @@ export class EmployeeController {
     @Param('id') id: string,
     @Body() updateEmployeeDto: UpdateEmployeeDto,
   ) {
-    return this.employeeService.update(id, updateEmployeeDto);
+    return this.employeeService.update(id, new Employee(updateEmployeeDto));
   }
 
   @Delete(':id')

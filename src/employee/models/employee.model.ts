@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type EmployeeDocument = EmployeeDefinition & Document;
 
@@ -22,9 +22,6 @@ export type EmployeeDocument = EmployeeDefinition & Document;
   },
 })
 export class EmployeeDefinition {
-  @Prop({ type: Types.ObjectId })
-  _id!: string;
-
   @Prop()
   firstName!: string;
 
