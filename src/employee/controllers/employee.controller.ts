@@ -11,36 +11,39 @@ import { EmployeeService } from '../services/employee.service';
 import { CreateEmployeeDto } from '../dtos/create-employee.dto';
 import { UpdateEmployeeDto } from '../dtos/update-employee.dto';
 import { Employee } from '../entities/employee.entity';
+import { EmployeeResponseDto } from '../dtos/employee-response.dto';
 
 @Controller('v1/employees')
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto) {
+  async create(
+    @Body() createEmployeeDto: CreateEmployeeDto,
+  ): Promise<EmployeeResponseDto> {
     return this.employeeService.create(new Employee(createEmployeeDto));
   }
 
   @Get()
-  findAll() {
+  async findAll(): Promise<EmployeeResponseDto[]> {
     return this.employeeService.getAll();
   }
 
   @Get(':id')
-  getById(@Param('id') id: string) {
+  async getById(@Param('id') id: string): Promise<EmployeeResponseDto> {
     return this.employeeService.getById(id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateEmployeeDto: UpdateEmployeeDto,
-  ) {
+  ): Promise<EmployeeResponseDto> {
     return this.employeeService.update(id, new Employee(updateEmployeeDto));
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string): Promise<void> {
     return this.employeeService.delete(id);
   }
 }

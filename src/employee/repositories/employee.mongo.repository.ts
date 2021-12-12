@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { deleteUndefineds } from 'src/utils/object';
 import { Employee } from '../entities/employee.entity';
 import { EmployeeDefinition, EmployeeDocument } from '../models/employee.model';
 import { IEmployeeRepository } from './employee.repository';
@@ -49,8 +50,8 @@ export class EmployeeMongoRepository implements IEmployeeRepository {
   async update(id: string, employeeUpdate: Employee): Promise<Employee> {
     const employee = await this.employeeModel.findByIdAndUpdate(
       id,
-      { $set: employeeUpdate },
-      { new: true },
+      { $set: deleteUndefineds(employeeUpdate) },
+      { new: true, useFindAndModify: false },
     );
 
     if (!employee) {

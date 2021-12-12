@@ -12,23 +12,26 @@ export class EmployeeService {
     private employeeRepository: IEmployeeRepository,
   ) {}
 
-  create(employee: Employee) {
+  async create(employee: Employee): Promise<Employee> {
     return this.employeeRepository.create(employee);
   }
 
-  getAll() {
+  async getAll(): Promise<Employee[]> {
     return this.employeeRepository.getAll();
   }
 
-  getById(id: string) {
+  async getById(id: string): Promise<Employee> {
     return this.employeeRepository.getById(id);
   }
 
-  update(id: string, employeeUpdate: Partial<Employee>) {
+  async update(
+    id: string,
+    employeeUpdate: Partial<Employee>,
+  ): Promise<Employee> {
     return this.employeeRepository.update(id, employeeUpdate);
   }
 
-  delete(id: string) {
+  async delete(id: string): Promise<void> {
     return this.employeeRepository.delete(id);
   }
 }
