@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Employee } from './entities/employee.entity';
+import { Employee } from '../entities/employee.entity';
 import {
   EMPLOYEE_REPOSITORY,
   IEmployeeRepository,
-} from './repositories/employee.repository';
+} from '../repositories/employee.repository';
 
 @Injectable()
 export class EmployeeService {
